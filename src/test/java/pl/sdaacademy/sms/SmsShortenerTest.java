@@ -38,7 +38,20 @@ class SmsShortenerTest {
     @Test
     void shouldShortenSmsWithTab() {
         // given
-        String longSms = "Ala \t ma kota";
+        String longSms = "Ala ma\t kota";
+        String expected = "AlaMaKota";
+
+        //when
+        String shortenedSms = smsShortener.shortenSms(longSms);
+
+        //then
+        assertEquals(expected, shortenedSms);
+    }
+
+    @Test
+    void shouldShortenSmsWith() {
+        // given
+        String longSms = "Ala \t ma\t kota";
         String expected = "AlaMaKota";
 
         //when

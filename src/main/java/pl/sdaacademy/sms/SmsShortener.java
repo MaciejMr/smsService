@@ -8,8 +8,9 @@ public class SmsShortener {
 
         StringBuilder stringBuilder = new StringBuilder();
         for (String word: shortSms) {
-            if (word != null && !word.isBlank()) {
-                stringBuilder.append(word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase());
+            String trimmed = word.trim();
+            if (word != null && !trimmed.isEmpty()) {
+                stringBuilder.append(trimmed.substring(0, 1).toUpperCase() + trimmed.substring(1).toLowerCase());
             }
         }
 
