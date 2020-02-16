@@ -7,6 +7,5 @@ public class Main {
 
         String inputLine = new Scanner(System.in).nextLine();
 
-        System.out.println(new SmsShortener().shortenSms(inputLine));
     }
 }

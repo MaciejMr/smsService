@@ -2,12 +2,9 @@ package pl.sdaacademy.sms;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SmsShortenerTest {
-
-    SmsShortener smsShortener = new SmsShortener();
 
     @Test
     void shouldShortenValidSms() {
@@ -16,7 +13,7 @@ class SmsShortenerTest {
         String expected = "AlaMaKota";
 
         //when
-        String shortenedSms = smsShortener.shortenSms(longSms);
+        String shortenedSms = new SmsShortener(longSms).shortenSms();
 
         //then
         assertEquals(expected, shortenedSms);
@@ -29,7 +26,7 @@ class SmsShortenerTest {
         String expected = "AlaMaKota";
 
         //when
-        String shortenedSms = smsShortener.shortenSms(longSms);
+        String shortenedSms = new SmsShortener(longSms).shortenSms();
 
         //then
         assertEquals(expected, shortenedSms);
@@ -42,7 +39,7 @@ class SmsShortenerTest {
         String expected = "AlaMaKota";
 
         //when
-        String shortenedSms = smsShortener.shortenSms(longSms);
+        String shortenedSms = new SmsShortener(longSms).shortenSms();
 
         //then
         assertEquals(expected, shortenedSms);
@@ -55,7 +52,7 @@ class SmsShortenerTest {
         String expected = "AlaMaKota";
 
         //when
-        String shortenedSms = smsShortener.shortenSms(longSms);
+        String shortenedSms = new SmsShortener(longSms).shortenSms();
 
         //then
         assertEquals(expected, shortenedSms);
@@ -68,9 +65,50 @@ class SmsShortenerTest {
         String expected = "";
 
         //when
-        String shortenedSms = smsShortener.shortenSms(longSms);
+        String shortenedSms = new SmsShortener(longSms).shortenSms();
 
         //then
         assertEquals(expected, shortenedSms);
+    }
+
+    @Test
+    void shouldCountMessagesOnEmptyInput() {
+        // given
+        String longSms = "   \t";
+        int excpectedCount = 0;
+
+        //when
+        int actualMessageCount = new SmsShortener(longSms).countMessages();
+
+        //then
+        assertEquals(excpectedCount, actualMessageCount);
+    }
+
+    @Test
+    void shouldCountMessages() {
+        // given
+        String longSms = "Ala ma kota";
+        int excpectedCount = 1;
+
+        //when
+        int actualMessageCount = new SmsShortener(longSms).countMessages();
+
+        //then
+        assertEquals(excpectedCount, actualMessageCount);
+    }
+
+    @Test
+    void shouldCountMoreThanOneMessage() {
+        // given
+        String longSms = "Loremipsumdolorsit  amet,consecteturadipiscingelit." +
+                "Duisrutrumv  estibulumdoloridpulvinar." +
+                "Seddignissim,temporultrices,\tlibe.Seddignissim,temporultrices,liberr.Seddig.";
+        int excpectedCount = 2;
+
+        //when
+        int actualMessageCount = new SmsShortener(longSms).countMessages();
+
+        //then
+        assertEquals(excpectedCount, actualMessageCount);
     }
 }
